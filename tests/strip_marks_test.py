@@ -2,7 +2,7 @@ from typing import Iterable
 
 import pytest
 
-from src import strip_marks
+import strip_marks
 
 
 @pytest.fixture
