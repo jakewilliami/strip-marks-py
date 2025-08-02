@@ -20,7 +20,7 @@ assert strip_marks("hello world") == identity("hello world")
 
 This package is not published on PyPI, but you can use it from Git.  For example, if using [UV](https://github.com/astral-sh/uv/) for dependency management, you could write:
 
-```commandline
+```shell
 $ uv add "strip_marks @ git+https://github.com/jakewilliami/strip-marks-py"
 ```
 
