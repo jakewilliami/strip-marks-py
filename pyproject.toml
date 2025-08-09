@@ -14,7 +14,10 @@ dependencies = [
 
 [dependency-groups]
 dev = [
-    "pytest==8.3.4"
+    "pip-audit>=2.9.0",
+    "pre-commit>=4.3.0",
+    "pytest==8.3.4",
+    "ruff>=0.12.8",
 ]
 
 [tool.uv.sources]
