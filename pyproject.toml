@@ -22,3 +22,24 @@ ispunct = { git = "https://github.com/jakewilliami/ispunct-py", tag = "v1.0.0" }
 
 [tool.pytest.ini_options]
 pythonpath = "src"
+
+[tool.ruff]
+# https://peps.python.org/pep-0008/#maximum-line-length
+line-length = 80
+
+[tool.ruff.lint]
+select = [
+    "E",    # pycodestyle
+    "F",    # Pyflakes
+    "UP",   # pyupgrade
+    "B",    # flake8-bugbear
+    "SIM",  # flake8-simplify
+    "I",    # isort
+]
+ignore = [
+    # "B008",  # docs.astral.sh/ruff/rules/function-call-in-default-argument/
+]
+fixable = ["ALL"]
+
+[tool.ruff.lint.per-file-ignores]
+"__init__.py" = ["F401"]  # Unused imports

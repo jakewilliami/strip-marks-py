@@ -1,0 +1,117 @@
+name: CI
+
+# UV/Ruff workflow adapted from:
+#   github.com/scottzach1/Python-Injection-Framework/blob/ab4c1780/.github/workflows/pipeline.yml
+
+on:
+  push:
+    branches:
+      # NOTE: cannot use ${{ github.event.repository.default_branch }} in trigger def:
+      #   stackoverflow.com/a/68414395
+      - master
+      - main
+    tags: ['*']
+  pull_request:
+
+jobs:
+  meta:
+    # Inspiration:
+    #   github.com/sharkdp/fd/blob/b7fe2ce9/.github/workflows/CICD.yml#L60-L65
+    name: Project Metadata
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: astral-sh/setup-uv@v6
+      - run: uv python install
+      - run: |
+          echo "name=$(uvx --from=toml-cli toml get --toml-path=pyproject.toml project.name)" | tee -a $GITHUB_OUTPUT
+          echo "version=$(uvx --from=toml-cli toml get --toml-path=pyproject.toml project.version)" | tee -a $GITHUB_OUTPUT
+    outputs:
+      name: ${{ steps.crate_metadata.outputs.name }}
+      version: ${{ steps.crate_metadata.outputs.version }}
+
+  format:
+    name: Format
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Install UV
+        uses: astral-sh/setup-uv@v4
+        with:
+          python-version: ${{ matrix.python-version }}
+
+      - name: Install Python
+        run: uv python install
+
+      - name: Instantiate project
+        run: uv sync --dev
+
+      - name: Install Just
+        uses: extractions/setup-just@v1  # or taiki-e/install-action@just
+
+      - name: Ruff (linting and formatting, using pre commit)
+        run: just fmt
+
+  test:
+    name: Test
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python-version:
+          - "3.11"
+          - "3.12"
+          - "3.13"
+      fail-fast: false
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Install UV
+        uses: astral-sh/setup-uv@v4
+
+      - name: Install Python
+        run: uv python install
+
+      - name: Instantiate project
+        run: uv sync --dev
+
+      - name: Install Just
+        uses: extractions/setup-just@v1  # or taiki-e/install-action@just
+
+      - name: Run tests
+        run: just test
+
+  audit:
+    name: Supply Chain Security Audit
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Install UV
+        uses: astral-sh/setup-uv@v4
+
+      - name: Install Python
+        run: uv python install
+
+      - name: Install Just
+        uses: extractions/setup-just@v1  # or taiki-e/install-action@just
+
+      - name: Audit dependencies
+        run: just audit
+
+  sniff:
+    name: Truffle Hog (Secret Sniffer)
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Secret scanning
+        uses: trufflesecurity/trufflehog@main
+        with:
+          extra_args: --results=verified,unknown
