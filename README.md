@@ -26,7 +26,9 @@ $ uv add "strip_marks @ git+https://github.com/jakewilliami/strip-marks-py"
 
 ## Notes on Internal Functionality
 
-This library also implements (and uses internally) functions adapted from the `utf8proc` C library to handle characters of multiple codepoints.  We also use bitwise functionality from our sister package, [`ispunct`](https://github.com/jakewilliami/ispunct-py).
+This library uses [Python's `unicodedata` standard library](https://docs.python.org/3/library/unicodedata.html) for normalising strings to strip marks.
+
+Early (incomplete) versions of the library implemented (and used internally) functions adapted from the [`utf8proc` C library](https://github.com/JuliaStrings/utf8proc) to handle characters of multiple codepoints.  This implementation used bitwise functionality from our sister package, [`ispunct`](https://github.com/jakewilliami/ispunct-py).  I would like to continue to explore this lower-level problem space to see if I can implement something in Python that is more efficient than the [current implementation](https://github.com/jakewilliami/strip-marks-py/tree/v1.0.0).
 
 ## Alternative Libraries
 
