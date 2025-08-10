@@ -14,7 +14,7 @@ def strip_marks(s: str) -> str:
     s_norm = unicodedata.normalize("NFD", s)
 
     # Step 2: keep only base characters
-    s_base = ''.join(ch for ch in s_norm if not unicodedata.combining(ch))
+    s_base = "".join(ch for ch in s_norm if not unicodedata.combining(ch))
 
     # Step 3: re-compose normalised form without base characters
     return unicodedata.normalize("NFC", s_base)
