@@ -1,20 +1,12 @@
-import unicodedata
+from strip_marks.constants import UTF8PROC_COMPOSE, UTF8PROC_STRIPMARK
+from strip_marks.unicode import utf8proc_map
 
 
 def strip_marks(s: str) -> str:
     """
     Strip non-spacing marks (e.g., accents) from input string.
+
+    Adapted from a specialised usecase of Julia's `normalize` function:
+      <https://github.com/JuliaLang/julia/blob/17fff87/base/strings/unicode.jl#L197-L236>
     """
-
-    # Base case: return input string is only made up of combining characters
-    if all(unicodedata.combining(c) for c in s):
-        return s
-
-    # Step 1: decompose input into normal form
-    s_norm = unicodedata.normalize("NFD", s)
-
-    # Step 2: keep only base characters
-    s_base = "".join(ch for ch in s_norm if not unicodedata.combining(ch))
-
-    # Step 3: re-compose normalised form without base characters
-    return unicodedata.normalize("NFC", s_base)
+    return utf8proc_map(s, UTF8PROC_COMPOSE | UTF8PROC_STRIPMARK)
