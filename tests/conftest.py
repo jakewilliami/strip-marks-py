@@ -16,10 +16,11 @@ def unicode_stripped_pairs() -> Iterable[tuple[str, str]]:
         yield (
             "kaderdenkesişenyollarinhikayesi.xyz",
             "kaderdenkesisenyollarinhikayesi.xyz",
-        )  # , 35
-        yield "şéàşöñ", "season"  # , 6
+        )
+        yield "şéàşöñ", "season"
         yield "ç", "c"
         yield "かな漢字", "かな漢字"  # These are identical
+        yield "hello, world", "hello, world"  # These are identical
 
     yield genpairs()
 
