@@ -12,6 +12,11 @@ dependencies = [
     "ispunct>=1.0.0",
 ]
 
+[project.urls]
+# https://github.com/patrick91/links-demo/blob/163034f
+Repository = "https://github.com/jakewilliami/strip-marks-py"
+PyPI = "https://pypi.org/p/strip-marks"
+
 [dependency-groups]
 dev = [
     "pip-audit>=2.9.0",
