@@ -1,6 +1,6 @@
 [project]
 name = "strip-marks"
-version = "1.0.0"
+version = "1.0.1"
 description = "Small Python library to strip non-spacing marks (e.g., diacritics) from a string"
 authors = [
     { name = "Jake W. Ireland", email = "jakewilliami@icloud.com" },
@@ -9,7 +9,7 @@ readme = "README.md"
 requires-python = ">=3.11, <4.0.0"
 license = { text = "MIT" }
 dependencies = [
-    "ispunct>=1.0.0",
+    "ispunct>=1.0.4",
 ]
 
 [project.urls]
@@ -24,9 +24,6 @@ dev = [
     "pytest==8.3.4",
     "ruff>=0.12.8",
 ]
-
-[tool.uv.sources]
-ispunct = { git = "https://github.com/jakewilliami/ispunct-py", tag = "v1.0.0" }
 
 [tool.pytest.ini_options]
 pythonpath = "src"

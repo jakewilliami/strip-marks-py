@@ -180,8 +180,12 @@ wheels = [
 
 [[package]]
 name = "ispunct"
-version = "1.0.0"
-source = { git = "https://github.com/jakewilliami/ispunct-py?tag=v1.0.0#6b867ae7036d038d91c305525d77a39299db8efa" }
+version = "1.0.4"
+source = { registry = "https://pypi.org/simple" }
+sdist = { url = "https://files.pythonhosted.org/packages/42/59/c1fbbb70dbecf682d158d713ed64ba74a2c3ee765ef2a234726e87064d0a/ispunct-1.0.4.tar.gz", hash = "sha256:f7c3a004e9022833cff1e51cf2ccb0e191061060b5d7e1fba6fbd6832f150157", size = 5649, upload-time = "2026-01-07T03:28:15.738Z" }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/75/db/9db5db5855d846989b4b9b13fb3cd5c465a49fc2deb30eac89c6aaa34cfd/ispunct-1.0.4-py3-none-any.whl", hash = "sha256:9b7643dea572ae260daf4a7570844b3ab2cd38bc9cdfd5ecd83796114749f79e", size = 6824, upload-time = "2026-01-07T03:28:14.284Z" },
+]
 
 [[package]]
 name = "license-expression"
@@ -513,7 +517,7 @@ wheels = [
 
 [[package]]
 name = "strip-marks"
-version = "1.0.0"
+version = "1.0.1"
 source = { virtual = "." }
 dependencies = [
     { name = "ispunct" },
@@ -528,7 +532,7 @@ dev = [
 ]
 
 [package.metadata]
-requires-dist = [{ name = "ispunct", git = "https://github.com/jakewilliami/ispunct-py?tag=v1.0.0" }]
+requires-dist = [{ name = "ispunct", specifier = ">=1.0.4" }]
 
 [package.metadata.requires-dev]
 dev = [
