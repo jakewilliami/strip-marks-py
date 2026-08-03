@@ -179,11 +179,6 @@ wheels = [
 ]
 
 [[package]]
-name = "ispunct"
-version = "1.0.0"
-source = { git = "https://github.com/jakewilliami/ispunct-py?tag=v1.0.0#6b867ae7036d038d91c305525d77a39299db8efa" }
-
-[[package]]
 name = "license-expression"
 version = "30.4.4"
 source = { registry = "https://pypi.org/simple" }
@@ -513,11 +508,8 @@ wheels = [
 
 [[package]]
 name = "strip-marks"
-version = "1.0.0"
+version = "1.0.2"
 source = { virtual = "." }
-dependencies = [
-    { name = "ispunct" },
-]
 
 [package.dev-dependencies]
 dev = [
@@ -528,7 +520,6 @@ dev = [
 ]
 
 [package.metadata]
-requires-dist = [{ name = "ispunct", git = "https://github.com/jakewilliami/ispunct-py?tag=v1.0.0" }]
 
 [package.metadata.requires-dev]
 dev = [

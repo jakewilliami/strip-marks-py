@@ -18,10 +18,16 @@ assert strip_marks("hello world") == identity("hello world")
 
 ## Using `strip_marks` as a Library
 
-This package is not published on PyPI, but you can use it from Git.  For example, if using [UV](https://github.com/astral-sh/uv/) for dependency management, you could write:
+This package is published on PyPI.  You can install it with PIP:
 
-```shell
-$ uv add "strip_marks @ git+https://github.com/jakewilliami/strip-marks-py"
+```commandline
+$ pip add strip-marks
+```
+
+Or, if using [UV](https://github.com/astral-sh/uv/) for dependency management:
+
+```commandline
+$ uv add strip-marks
 ```
 
 ## Notes on Internal Functionality
